@@ -11,12 +11,16 @@ const images = importAll(
 document.addEventListener('DOMContentLoaded', () => {
   const projectBtn = document.getElementById('project-btn')
   projectBtn.addEventListener('click', TodoList.renderProjectInput)
-  const ul = document.getElementById('add-project')
-  ul.addEventListener('click', (e)=> {
+  const inputDiv = document.getElementById("input-div")
+  inputDiv.addEventListener('click', (e)=> {
       if(e.target.id == "remove-icon") {
         TodoList.removeProjectInput()
       }
   })
-  const addBtn = document.getElementById('remove-icon')
-  addBtn.addEventListener('click', TodoList.confirmProjectInput)
+  inputDiv.addEventListener('click', (e)=> {
+    if(e.target.id == "check-icon") {
+      TodoList.addProject()
+      TodoList.removeProjectInput()
+    }
+})
 })
