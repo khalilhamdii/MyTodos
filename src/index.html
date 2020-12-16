@@ -11,8 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
 
-<body
-  style="background: linear-gradient(rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.8) 100%), url(&quot;assets/img/ToDoList_1920x1080.jpg&quot;) no-repeat;background-size: auto, cover;">
+<body>
   <!-- Start: Navigation Clean -->
   <nav class="navbar navbar-light navbar-expand-md navigation-clean"
     style="height: 60px;padding-top: 5px;padding-bottom: 5px;">
@@ -57,8 +56,9 @@
               style="font-size: 20px;color: rgb(255,255,255);margin-left: -15px;padding-left: 20px;"><strong>Project
                 1</strong></li>
           </ul>
-          <div id="input-div" class="mb-3"></div>
-        </div><button class="btn btn-warning btn-sm float-right" id="project-btn" type="button"><i class="fa fa-plus"></i><span>Add a new
+          <div id="project-input" class="mb-3"></div>
+        </div><button class="btn btn-warning btn-sm float-right" id="project-btn" type="button"><i
+            class="fa fa-plus"></i><span>Add a new
             project</span></button>
       </div>
       <div class="col-md-12 col-lg-8 offset-lg-1">
@@ -78,55 +78,9 @@
             <span class="d-flex justify-content-center align-items-center">Due Date</span>
           </div>
         </div>
-        <div class="row no-gutters d-flex flex-row" data-bs-hover-animate="pulse"
-          style="margin: 5px;margin-top: 15px;color: rgb(255,255,255);border-width: 0.5px;border-style: none;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);">
-          <div class="col-4 col-sm-5 col-md-6 col-lg-5 d-flex justify-content-start align-items-center">
-            <div class="form-check"><input class="form-check-input d-lg-flex align-items-lg-center" type="checkbox"
-                id="formCheck-6" style="border-radius: 0px;"><label
-                class="form-check-label d-lg-flex align-items-lg-center" for="formCheck-1"><strong>Task
-                  name</strong></label></div>
-          </div>
-          <div
-            class="col-2 col-sm-2 col-md-2 col-lg-2 d-flex d-md-flex d-lg-flex justify-content-sm-center justify-content-md-center justify-content-lg-center">
-            <span class="d-sm-flex">Priority</span>
-          </div>
-          <div
-            class="col-4 col-sm-3 col-md-3 col-lg-4 d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center">
-            <span class="d-flex justify-content-center align-items-center">Task date&nbsp;</span>
-          </div>
-          <div
-            class="col-2 col-md-1 col-lg-1 d-flex d-md-flex d-lg-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center">
-            <i class="fa fa-edit" style="color: rgb(255,193,7);"></i><i class="fa fa-trash"
-              style="color: rgb(255,193,7);"></i>
-          </div>
-        </div>
-        <div class="row no-gutters d-flex flex-row"
-          style="margin: 5px;margin-top: 15px;color: rgb(255,255,255);background: rgba(23,162,184,0.5);border: 0.5px solid rgb(255,193,7) ;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);">
-          <div class="col-4 col-sm-5 col-md-6 col-lg-5 d-flex justify-content-start align-items-center"><input
-              type="text" class="w-100"
-              style="border-style: none;padding-left: 20px;border-radius: 15px;line-height: 30px;background: rgb(255,193,7);height: 32px;"
-              placeholder="Enter task name..." required="" minlength="3" maxlength="15"></div>
-          <div
-            class="col-2 col-sm-2 col-md-2 col-lg-2 d-flex d-md-flex d-lg-flex justify-content-sm-center justify-content-md-center justify-content-lg-center">
-            <div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
-                aria-expanded="false" type="button"
-                style="background: transparent;border-style: none;color: rgb(255,193,7);font-size: 20px;">Priority</button>
-              <div class="dropdown-menu"><a class="dropdown-item" href="#">Very High</a><a class="dropdown-item"
-                  href="#">High</a><a class="dropdown-item" href="#">Medium</a><a class="dropdown-item" href="#">Low</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 col-sm-3 col-md-3 col-lg-4 d-md-flex d-lg-flex align-items-lg-center"
-            style="padding-right: 10px;padding-left: 10px;border-style: none;"><input class="d-lg-flex w-100"
-              type="date"
-              style="border-style: none;padding-right: 20px;padding-left: 20px;border-radius: 15px;line-height: 30px;color: rgb(0,0,0);background: rgb(255,193,7);height: 32px;">
-          </div>
-          <div
-            class="col-2 col-md-1 col-lg-1 d-flex d-md-flex d-lg-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center">
-            <i class="fa fa-check" style="color: rgb(255,193,7);"></i><i class="fa fa-remove"
-              style="color: rgb(255,193,7);margin-left: 10px;"></i>
-          </div>
-        </div><button class="btn btn-warning btn-sm float-right" type="button" style="margin-top: 30px;"><i
+        <div id="tasks"></div>
+        <div id="new-task-input"></div>
+        <button id="task-btn" class="btn btn-warning btn-sm float-right" type="button" style="margin-top: 30px;"><i
             class="fa fa-plus"></i><span>Add a new task</span></button>
       </div>
     </div>
