@@ -89,11 +89,26 @@ const TodoList = (() => {
           <li data-bs-hover-animate="pulse"
                 style="font-size: 20px;color: rgb(255,255,255);margin-left: -15px;padding-left: 20px;"><strong>${input}</strong></li>
           `;
+        const project = new Project(input)
+        let counter = addCount()
+        localStorage.setItem(`Project-${counter}`, JSON.stringify(project))
   };
 
   const addTask = () => {
     const tasks = document.getElementById("tasks");
     tasks.innerHTML += renderTask();
+  };
+
+  function Project(name) {
+    this.name = name
+    this.tasks = []
+  }
+
+  const addCount = () => {
+    const value = localStorage.getItem('projectCounter');
+    const counter = JSON.parse(value) + 1;
+    localStorage.projectCounter = JSON.stringify(counter);
+    return counter;
   };
 
   return {
