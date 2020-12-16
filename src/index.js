@@ -27,6 +27,7 @@ const bodyBg = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   bodyBg();
+  TodoList.showProjects();
   const projectBtn = document.getElementById("project-btn");
   const taskBtn = document.getElementById("task-btn");
   const projectInput = document.getElementById("project-input");
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   projectInput.addEventListener("click", (e) => {
     if (e.target.id == "project-check") {
-      TodoList.addProject();
+      TodoList.addProjectToLocalStorage();
       TodoList.removeProjectInput();
     } else if (e.target.id == "project-remove") {
       TodoList.removeProjectInput();
