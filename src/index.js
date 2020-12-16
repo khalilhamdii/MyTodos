@@ -60,15 +60,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  var elements = document.querySelectorAll(".active-project");
-  console.log(elements);
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener(
-      "click",
-      function () {
-        getProjectIndex(elements[i]);
-      },
-      false
-    );
-  }
+  // var elements = document.querySelectorAll(".active-project");
+  // console.log(elements);
+  // for (var i = 0; i < elements.length; i++) {
+  //   elements[i].addEventListener(
+  //     "click",
+  //     function () {
+  //       getProjectIndex(elements[i]);
+  //     },
+  //     false
+  //   );
+  // }
+  const ul = document.getElementById("add-project")
+  ul.addEventListener('click', (e) => {
+    if(e.target.tagName === "LI") {
+      getProjectIndex(e.target)
+    }
+  })
 });
