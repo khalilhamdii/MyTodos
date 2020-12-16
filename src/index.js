@@ -27,8 +27,7 @@ const bodyBg = () => {
 
 const getProjectIndex = (item) => {
   const index = item.dataset.index;
-  console.log(index);
-  alert(index);
+  return index;
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -60,21 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // var elements = document.querySelectorAll(".active-project");
-  // console.log(elements);
-  // for (var i = 0; i < elements.length; i++) {
-  //   elements[i].addEventListener(
-  //     "click",
-  //     function () {
-  //       getProjectIndex(elements[i]);
-  //     },
-  //     false
-  //   );
-  // }
-  const ul = document.getElementById("add-project")
-  ul.addEventListener('click', (e) => {
-    if(e.target.tagName === "LI") {
-      getProjectIndex(e.target)
+  const ul = document.getElementById("project-list");
+  ul.addEventListener("click", (e) => {
+    if (e.target.tagName === "LI") {
+      const index = getProjectIndex(e.target);
+      TodoList.showTasks(index);
     }
-  })
+  });
 });

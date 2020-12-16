@@ -41,6 +41,15 @@ const TodoList = (() => {
           `;
   };
 
+  const renderHeader = (name) => {
+    const header = document.getElementById("header");
+    header.innerHTML = `
+      <h3 class="text-left"
+          style="border-bottom-style: none;background: #17a2b8;color: rgb(255,255,255);padding-top: 10px;padding-bottom: 10px;padding-left: 10px;border-top-left-radius: 15px;border-bottom-right-radius: 15px;">
+          MyTodos | ${name}</h3>
+      `;
+  };
+
   const renderTask = () => {
     const taskName = document.getElementById("task_name").value;
     const taskPriority = document.getElementById("task_priority").value;
@@ -83,7 +92,7 @@ const TodoList = (() => {
   };
 
   const renderProject = (value, index) => {
-    const ul = document.getElementById("add-project");
+    const ul = document.getElementById("project-list");
     ul.innerHTML += `
           <li class="active-project font-weight-bold" data-bs-hover-animate="pulse" data-index="${index}"
                 style="font-size: 20px;color: rgb(255,255,255);margin-left: -15px;padding-left: 20px;">${value}</li>
@@ -126,6 +135,12 @@ const TodoList = (() => {
     }
   };
 
+  const showTasks = (index) => {
+    const value = localStorage.getItem(`Project-${index}`);
+    const project = JSON.parse(value);
+    renderHeader(project.name);
+  };
+
   return {
     renderProjectInput,
     renderTaskInput,
@@ -134,6 +149,7 @@ const TodoList = (() => {
     removeTaskInput,
     addProjectToLocalStorage,
     showProjects,
+    showTasks,
   };
 })();
 
