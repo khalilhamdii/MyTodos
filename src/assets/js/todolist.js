@@ -85,18 +85,18 @@ const TodoList = (() => {
   const renderProject = (value, index) => {
     const ul = document.getElementById("add-project");
     ul.innerHTML += `
-          <li data-bs-hover-animate="pulse" data-index = "${index}"
-                style="font-size: 20px;color: rgb(255,255,255);margin-left: -15px;padding-left: 20px;"><strong>${value}</strong></li>
+          <li class="active-project font-weight-bold" data-bs-hover-animate="pulse" data-index="${index}"
+                style="font-size: 20px;color: rgb(255,255,255);margin-left: -15px;padding-left: 20px;">${value}</li>
           `;
   };
 
   const addProjectToLocalStorage = () => {
     const name = document.getElementById("input").value;
-    const project = new Project(name)
-    let counter = addCount()
-    localStorage.setItem(`Project-${counter}`, JSON.stringify(project))
-    renderProject(name, counter)
-  }
+    const project = new Project(name);
+    let counter = addCount();
+    localStorage.setItem(`Project-${counter}`, JSON.stringify(project));
+    renderProject(name, counter);
+  };
 
   const addTask = () => {
     const tasks = document.getElementById("tasks");
@@ -104,12 +104,12 @@ const TodoList = (() => {
   };
 
   function Project(name) {
-    this.name = name
-    this.tasks = []
+    this.name = name;
+    this.tasks = [];
   }
 
   const addCount = () => {
-    const value = localStorage.getItem('projectCounter');
+    const value = localStorage.getItem("projectCounter");
     const counter = JSON.parse(value) + 1;
     localStorage.projectCounter = JSON.stringify(counter);
     return counter;
@@ -118,13 +118,13 @@ const TodoList = (() => {
   const showProjects = () => {
     for (let i = 0; i < localStorage.length; i += 1) {
       const key = localStorage.key(i);
-      if (key.startsWith('Project-')) {
+      if (key.startsWith("Project-")) {
         const value = JSON.parse(localStorage[key]);
-        const index = key.valueOf().replace(/\D/g, '');
+        const index = key.valueOf().replace(/\D/g, "");
         renderProject(value.name, index);
       }
     }
-  }
+  };
 
   return {
     renderProjectInput,
@@ -133,7 +133,7 @@ const TodoList = (() => {
     removeProjectInput,
     removeTaskInput,
     addProjectToLocalStorage,
-    showProjects
+    showProjects,
   };
 })();
 

@@ -25,6 +25,12 @@ const bodyBg = () => {
   document.body.style.backgroundSize = "auto, cover";
 };
 
+const getProjectIndex = (item) => {
+  const index = item.dataset.index;
+  console.log(index);
+  alert(index);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   bodyBg();
   TodoList.showProjects();
@@ -53,4 +59,16 @@ document.addEventListener("DOMContentLoaded", () => {
       TodoList.removeTaskInput();
     }
   });
+
+  var elements = document.querySelectorAll(".active-project");
+  console.log(elements);
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener(
+      "click",
+      function () {
+        getProjectIndex(elements[i]);
+      },
+      false
+    );
+  }
 });
