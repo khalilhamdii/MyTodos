@@ -200,7 +200,7 @@ const TodoList = (() => {
     check.addEventListener('click', (e)=> {
         if(e.target.className.includes("form-check-input")) {
           const idArr = e.target.closest(".task-target").dataset.id
-          renderLineThrough(idArr, e.target)
+          renderLineThrough(idArr, e.target.closest(".task-target"))
         }
     })
   }
@@ -222,7 +222,10 @@ const TodoList = (() => {
 
   const strikeThrough = (task, obj)=> {
     if(task.status == false) {
-      console.log(obj.innerHTML)
+      obj.style.textDecoration = "line-through"
+    }
+    else {
+      obj.style.textDecoration = "none"
     }
   }
 
