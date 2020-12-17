@@ -10,6 +10,7 @@ const TodoList = (() => {
     this.priority = priority;
     this.date = date;
     this.id = id;
+    this.status = true
   }
   // Constructors end
 
@@ -97,7 +98,7 @@ const TodoList = (() => {
   const renderTask = (obj) => {
     const tasks = document.getElementById("tasks");
     tasks.innerHTML += `
-      <div data-id="${obj.id}" class="row no-gutters d-flex flex-row" data-bs-hover-animate="pulse"
+      <div data-id="${obj.id}" class="task-target row no-gutters d-flex flex-row" data-bs-hover-animate="pulse"
   style="margin: 5px;margin-top: 15px;color: rgb(255,255,255);border-width: 0.5px;border-style: none;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);">
   <div class="col-4 col-sm-5 col-md-6 col-lg-5 d-flex justify-content-start align-items-center">
     <div class="form-check"><input class="form-check-input d-lg-flex align-items-lg-center" type="checkbox"
@@ -164,7 +165,7 @@ const TodoList = (() => {
     const priority = document.getElementById("task_priority").value;
     const date = document.getElementById("task_date").value;
     let taskCounter = addTaskCount();
-    const id = [index, taskCounter];
+    const id = [index, taskCounter.toString()];
     const taskObj = new Task(title, priority, date, id);
     const lsProject = localStorage.getItem(`Project-${index}`);
     const parsedLsProject = JSON.parse(lsProject);
@@ -194,6 +195,37 @@ const TodoList = (() => {
     }
   };
 
+  const clickCheckBox = ()=> {
+    const check = document.querySelector("#tasks")
+    check.addEventListener('click', (e)=> {
+        if(e.target.className.includes("form-check-input")) {
+          const idArr = e.target.closest(".task-target").dataset.id
+          renderLineThrough(idArr, e.target)
+        }
+    })
+  }
+
+  const renderLineThrough = (id, obj)=> {
+    const pid = id.split(',')[1]
+    const project = localStorage.getItem(`Project-${pid}`)
+    const parsedProject = JSON.parse(project)
+    parsedProject.tasks.map((task) => {
+      if(JSON.stringify(task.id) == JSON.stringify(id.split(','))) {
+        let index = parsedProject.tasks.indexOf(task)
+        task.status = !task.status
+        parsedProject.tasks[index] = task
+        strikeThrough(task, obj)
+      }
+    })
+    localStorage[`Project-${pid}`] = JSON.stringify(parsedProject)
+  }
+
+  const strikeThrough = (task, obj)=> {
+    if(task.status == false) {
+      console.log(obj.innerHTML)
+    }
+  }
+
   // Dom and localstorage manipulation end
 
   return {
@@ -209,6 +241,7 @@ const TodoList = (() => {
     showTasks,
     getProjectIndex,
     activeProject,
+    clickCheckBox
   };
 })();
 

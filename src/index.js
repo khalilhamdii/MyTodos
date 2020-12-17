@@ -26,6 +26,8 @@ const bodyBg = () => {
   document.body.style.backgroundSize = "auto, cover";
 };
 
+TodoList.clickCheckBox()
+
 document.addEventListener("DOMContentLoaded", () => {
   bodyBg();
   TodoList.showProjects();
