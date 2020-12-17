@@ -220,7 +220,7 @@ const TodoList = (() => {
     const pid = id.split(',')[0];
     const project = localStorage.getItem(`Project-${pid}`);
     const parsedProject = JSON.parse(project);
-    parsedProject.tasks.map((task) => {
+    parsedProject.tasks.forEach((task) => {
       if (JSON.stringify(task.id) === JSON.stringify(id.split(','))) {
         const index = parsedProject.tasks.indexOf(task);
         task.status = !task.status;
