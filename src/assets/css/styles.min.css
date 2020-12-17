@@ -1,3 +1,7 @@
+*:focus {
+  outline: none;
+}
+
 .footer-basic {
   padding: 40px 0;
   background-color: #fff;
@@ -187,7 +191,7 @@
   }
 }
 body {
-  background: #f96302;
+  color: white;
 }
 .container,
 .container-lg,
@@ -244,4 +248,12 @@ span {
 }
 .fa.fa-trash {
   margin-left: 10px;
+}
+
+ul .active {
+  color: #ffc107;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
