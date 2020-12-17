@@ -36,6 +36,8 @@ const TodoList = (() => {
 
   const activeProject = (item) => {
     const projectLis = document.querySelectorAll(".project-li");
+    const home = document.getElementById("home");
+    home.classList.remove("active");
     projectLis.forEach((item) => item.classList.remove("active"));
     item.classList.add("active");
   };
@@ -87,12 +89,8 @@ const TodoList = (() => {
   const renderHeader = (index) => {
     const value = localStorage.getItem(`Project-${index}`);
     const project = JSON.parse(value);
-    const header = document.getElementById("header");
-    header.innerHTML = `
-      <h3 class="text-left"
-          style="border-bottom-style: none;background: #17a2b8;color: rgb(255,255,255);padding-top: 10px;padding-bottom: 10px;padding-left: 10px;border-top-left-radius: 15px;border-bottom-right-radius: 15px;">
-          MyTodos | ${project.name}</h3>
-      `;
+    const header = document.getElementById("header").querySelector("h3");
+    header.innerHTML = `MyTodos | ${project.name}`;
   };
 
   const renderTask = (obj) => {
@@ -132,11 +130,6 @@ const TodoList = (() => {
     <span class="d-flex justify-content-center align-items-center">${
       obj.date
     }</span>
-  </div>
-  <div
-    class="col-2 col-md-1 col-lg-1 d-flex d-md-flex d-lg-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center">
-    <i class="fa fa-edit" style="color: rgb(255,193,7);"></i><i class="fa fa-trash"
-      style="color: rgb(255,193,7);"></i>
   </div>
   </div>
   `;
@@ -250,6 +243,25 @@ const TodoList = (() => {
     }
   };
 
+  const showAllTasks = () => {
+    const header = document.getElementById("header").querySelector("h3");
+    header.innerHTML = `MyTodos | Home`;
+    const taskArr = [];
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (key.startsWith("Project-")) {
+        const value = JSON.parse(localStorage[key]);
+        value.tasks.forEach((task) => taskArr.push(task));
+      }
+    }
+    const tasks = document.getElementById("tasks");
+    tasks.innerHTML = ``;
+
+    for (let i = 0; i < taskArr.length; i += 1) {
+      renderTask(taskArr[i]);
+    }
+  };
+
   // Dom and localstorage manipulation end
 
   return {
@@ -263,6 +275,7 @@ const TodoList = (() => {
     addTaskBtn,
     showProjects,
     showTasks,
+    showAllTasks,
     getProjectIndex,
     activeProject,
     clickCheckBox,

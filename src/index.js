@@ -26,14 +26,24 @@ const bodyBg = () => {
   document.body.style.backgroundSize = "auto, cover";
 };
 
-TodoList.clickCheckBox()
+TodoList.clickCheckBox();
 
 document.addEventListener("DOMContentLoaded", () => {
   bodyBg();
+  TodoList.showAllTasks();
   TodoList.showProjects();
   const projectBtn = document.getElementById("project-btn");
   const projectInput = document.getElementById("project-input");
   const taskInput = document.getElementById("new-task-input");
+  const home = document.getElementById("home");
+  home.addEventListener("click", () => {
+    const btn = document.getElementById("taskDivBtn");
+    btn.innerHTML = ``;
+    home.classList.add("active");
+    const projectLis = document.querySelectorAll(".project-li");
+    projectLis.forEach((item) => item.classList.remove("active"));
+    TodoList.showAllTasks();
+  });
 
   projectBtn.addEventListener("click", TodoList.renderProjectInput);
 

@@ -250,7 +250,7 @@ span {
   margin-left: 10px;
 }
 
-ul .active {
+.active {
   color: #ffc107;
 }
 
