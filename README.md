@@ -4,7 +4,7 @@
 
 ## Description
 
-> Todo App web app allows you to create your day to day schedule.
+> Mytodos web app allows users to keep track of their tasks in an easy way. Every user can create different tasks including priority and date. Tasks in Mytodos can be grouped into projects for better organization.
 
 ## Library Directory 📙
 
@@ -18,7 +18,7 @@
 
 ## Live Demo
 
-[Live demo](https://raw.githack.com/khalilhamdii/MyTodos/feature-branch/src/index.html)
+[Live demo](https://rawcdn.githack.com/khalilhamdii/MyTodos/a5d2e1d84a3f088d42fd98af1d87ba481790451e/dist/index.html)
 
 ## Screenshot
 
