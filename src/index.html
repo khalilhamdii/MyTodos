@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>todolist</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+
+<body>
+  <!-- Start: Navigation Clean -->
+  <nav class="navbar navbar-light navbar-expand-md navigation-clean"
+    style="height: 60px;padding-top: 5px;padding-bottom: 5px;">
+    <div class="container-fluid">
+      <div><a class="navbar-brand" href="#"
+          style="color: rgb(23,162,184);font-size: 26px;margin-right: 0px;">MyTodos</a><a class="navbar-brand" href="#"
+          style="color: rgb(255,193,7);font-size: 26px;">.</a></div>
+
+  </nav><!-- End: Navigation Clean -->
+  <div class="container vh-100" style="margin-top: 60px;padding-top: 60px">
+    <div class="row" style="margin-top: 0px;">
+      <div class="col-lg-3 offset-lg-0 mb-4 mb-sm-4 mb-lg-0" style="background: rgb(23,162,184);">
+        <h3 id="home" class="cursor-pointer" data-bs-hover-animate="pulse"
+          style="margin-bottom: 15px;font-size: 24px;padding-bottom: 5px;border-bottom: 0.5px solid rgb(255,193,7) ;">
+          Home</h3>
+        <div>
+          <h3 class="cursor-pointer" data-bs-hover-animate="pulse"
+            style="margin-bottom: 15px;font-size: 24px;padding-bottom: 5px;color: rgb(255,255,255);border-bottom: 0.5px solid rgb(255,193,7) ;">
+            My Projects</h3>
+          <ul class="list-unstyled" id="project-list">
+          </ul>
+          <div id="project-input" class="mb-3"></div>
+        </div><button class="btn btn-warning btn-sm float-right" id="project-btn" type="button"><i
+            class="fa fa-plus"></i><span>Add a new
+            project</span></button>
+      </div>
+      <div class="col-md-12 col-lg-8 offset-lg-1">
+        <div id="header">
+          <h3 class="text-left"
+            style="border-bottom-style: none;background: #17a2b8;color: rgb(255,255,255);padding-top: 10px;padding-bottom: 10px;padding-left: 10px;border-top-left-radius: 15px;border-bottom-right-radius: 15px;">
+            MyTodos | Home</h3>
+        </div>
+        <div class="row no-gutters d-flex flex-row"
+          style="color: rgb(0,0,0);background: #ffc107;border-style: none;border-bottom-style: none;border-bottom-color: rgb(255,193,7);">
+          <div class="col-4 col-sm-5 col-md-6 col-lg-5 d-flex justify-content-start align-items-center"><span
+              style="font-size: 20px;">Task title</span></div>
+          <div
+            class="col-2 col-sm-2 col-md-2 col-lg-2 d-flex d-md-flex d-lg-flex justify-content-sm-center justify-content-md-center justify-content-lg-center">
+            <span class="d-sm-flex">Priority</span>
+          </div>
+          <div
+            class="col-4 col-sm-3 col-md-3 col-lg-4 d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center">
+            <span class="d-flex justify-content-center align-items-center">Due Date</span>
+          </div>
+        </div>
+        <div id="tasks"></div>
+        <div id="new-task-input"></div>
+        <div id="taskDivBtn"></div>
+      </div>
+    </div>
+  </div><!-- Start: Footer Basic -->
+  <div class="footer-basic" style="background: rgb(23,162,184);color: rgb(255,255,255);">
+    <footer>
+      <!-- Start: Social Icons -->
+      <div class="social"><a href="#"><i class="icon ion-social-instagram" style="color: rgb(255,193,7);"></i></a><a
+          href="#"><i class="icon ion-social-snapchat" style="color: rgb(255,193,7);"></i></a><a href="#"><i
+            class="icon ion-social-twitter" style="color: rgb(255,193,7);"></i></a><a href="#"><i
+            class="icon ion-social-facebook" style="color: rgb(255,193,7);"></i></a></div><!-- End: Social Icons -->
+      <!-- Start: Copyright -->
+      <p class="copyright" style="color: rgb(255,193,7);font-size: 18px;">MyTodos © 2020</p><!-- End: Copyright -->
+    </footer>
+  </div><!-- End: Footer Basic -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
