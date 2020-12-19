@@ -18,7 +18,7 @@
 
 ## Live Demo
 
-[Live demo](https://rawcdn.githack.com/khalilhamdii/MyTodos/a5d2e1d84a3f088d42fd98af1d87ba481790451e/dist/index.html)
+[Live demo](https://khalilhamdii.github.io/MyTodos/)
 
 ## Screenshot
 
