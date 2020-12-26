@@ -27,6 +27,8 @@ const bodyBg = () => {
 };
 
 TodoList.clickCheckBox();
+TodoList.clickProjectEdit();
+TodoList.clickProjectRemove();
 TodoList.clickTaskRemove();
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -47,7 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
     TodoList.showAllTasks();
   });
 
-  projectBtn.addEventListener("click", TodoList.renderProjectInput);
+  projectBtn.addEventListener("click", () => {
+    TodoList.renderProjectInput(projectInput);
+  });
 
   projectInput.addEventListener("click", (e) => {
     if (e.target.id === "project-check") {
@@ -78,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       TodoList.addTaskBtn();
       const taskBtn = document.getElementById("task-btn");
       taskBtn.addEventListener("click", TodoList.renderTaskInput);
+    } else if (e.target.className.includes("fa-check")) {
     }
   });
 });

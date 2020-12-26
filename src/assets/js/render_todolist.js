@@ -44,9 +44,8 @@ const TodoList = (() => {
   // Helpers end
 
   // Render methods start
-  const renderProjectInput = () => {
-    const inputDiv = document.getElementById("project-input");
-    inputDiv.innerHTML = `
+  const renderProjectInput = (element) => {
+    element.innerHTML = `
           <div data-bs-hover-animate="pulse" style="font-size: 20px;color: rgb(255,255,255);margin-left: -15px;padding-left: 20px;">
           <div><input type="text" id="input" style="width: 120px;border-style: none;border-radius: 15px;margin-right: 10px;font-size: 12px;height: 35px;padding: 0 6px;" placeholder="Enter project name..."><i class="fa fa-check" id="project-check" style="margin-right: 7px;color: rgb(255,193,7);"></i><i class="fa fa-remove" id="project-remove" style="color: rgb(255,193,7);"></i></div>
           </div>
@@ -236,29 +235,6 @@ const TodoList = (() => {
     localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
   };
 
-  const removeTask = (taskId, element) => {
-    element.remove();
-    const pid = taskId.split(",")[0];
-    const project = localStorage.getItem(`Project-${pid}`);
-    const parsedProject = JSON.parse(project);
-    parsedProject.tasks.forEach((task, index) => {
-      if (task.id == taskId) {
-        parsedProject.tasks.splice(index, 1);
-      }
-    });
-    localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
-  };
-
-  const clickTaskRemove = () => {
-    const check = document.querySelector("#tasks");
-    check.addEventListener("click", (e) => {
-      if (e.target.className.includes("fa-trash")) {
-        const idArr = e.target.closest(".task-target").dataset.id;
-        removeTask(idArr, e.target.closest(".task-target"));
-      }
-    });
-  };
-
   const clickCheckBox = () => {
     const check = document.querySelector("#tasks");
     check.addEventListener("click", (e) => {
@@ -288,6 +264,65 @@ const TodoList = (() => {
     }
   };
 
+  const removeTask = (taskId, element) => {
+    element.remove();
+    const pid = taskId.split(",")[0];
+    const project = localStorage.getItem(`Project-${pid}`);
+    const parsedProject = JSON.parse(project);
+    parsedProject.tasks.forEach((task, index) => {
+      if (task.id == taskId) {
+        parsedProject.tasks.splice(index, 1);
+      }
+    });
+    localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
+  };
+
+  const clickTaskRemove = () => {
+    const check = document.querySelector("#tasks");
+    check.addEventListener("click", (e) => {
+      if (e.target.className.includes("fa-trash")) {
+        const idArr = e.target.closest(".task-target").dataset.id;
+        removeTask(idArr, e.target.closest(".task-target"));
+      }
+    });
+  };
+
+  const editProject = (projectId, element) => {
+    element.remove();
+    const pid = projectId.split(",")[0];
+    const project = localStorage.getItem(`Project-${pid}`);
+    const parsedProject = JSON.parse(project);
+    parsedProject.tasks.forEach((task, index) => {
+      if (task.id == projectId) {
+        parsedProject.tasks.splice(index, 1);
+      }
+    });
+    localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
+  };
+
+  const clickProjectEdit = () => {
+    const check = document.querySelector("#project-list");
+    check.addEventListener("click", (e) => {
+      if (e.target.className.includes("fa-edit")) {
+        const element = e.target.closest(".project-li");
+        renderProjectInput(element);
+      }
+    });
+  };
+
+  const clickProjectRemove = () => {
+    const check = document.querySelector("#project-list");
+    check.addEventListener("click", (e) => {
+      if (e.target.className.includes("fa-trash")) {
+        const element = e.target.closest(".project-li");
+        const index = element.dataset.index;
+        localStorage.removeItem(`Project-${index}`);
+        element.remove();
+        location.reload();
+      }
+    });
+  };
+
   // Dom and localstorage manipulation end
 
   return {
@@ -296,6 +331,8 @@ const TodoList = (() => {
     renderHeader,
     removeProjectInput,
     removeTaskInput,
+    clickProjectEdit,
+    clickProjectRemove,
     clickTaskRemove,
     addProjectToLocalStorage,
     addTask,
