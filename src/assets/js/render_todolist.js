@@ -141,7 +141,7 @@ const TodoList = (() => {
     const ul = document.getElementById("project-list");
     ul.innerHTML += `
           <li class="font-weight-bold project-li cursor-pointer" data-bs-hover-animate="pulse" data-index="${index}"
-                style="font-size: 20px;margin-left: -15px;padding-left: 20px;">${projectName}<i class="fa fa-edit ml-4" style="color: rgb(255,193,7);"></i><i class="fa fa-trash"
+                style="font-size: 20px;margin-left: -15px;padding-left: 20px;">${projectName} <i class="fa fa-edit fa-xs ml-2" style="color: rgb(255,193,7);"></i><i class="fa fa-trash fa-xs"
                 style="color: rgb(255,193,7);"></i></li>
           `;
   };
@@ -170,10 +170,16 @@ const TodoList = (() => {
 
   const addProjectToLocalStorage = () => {
     const name = document.getElementById("input").value;
-    const project = new Project(name);
-    const counter = addProjectCount();
-    localStorage.setItem(`Project-${counter}`, JSON.stringify(project));
-    renderProject(name, counter);
+    if (name.length > 3) {
+      const project = new Project(name);
+      const counter = addProjectCount();
+      localStorage.setItem(`Project-${counter}`, JSON.stringify(project));
+      renderProject(name, counter);
+      removeProjectInput();
+    } else {
+      const projectInput = document.getElementById("project-input");
+      renderProjectInput(projectInput);
+    }
   };
 
   const addTask = (index) => {
@@ -289,6 +295,16 @@ const TodoList = (() => {
 
   const editProject = (element) => {
     const id = element.dataset.index;
+    const projectName = element.querySelector("input").value;
+    if (projectName.length > 3) {
+      const project = localStorage.getItem(`Project-${id}`);
+      const parsedProject = JSON.parse(project);
+      parsedProject.name = projectName;
+      localStorage[`Project-${id}`] = JSON.stringify(parsedProject);
+      location.reload();
+    } else {
+      renderProjectInput(element);
+    }
   };
 
   const clickProjectEdit = () => {

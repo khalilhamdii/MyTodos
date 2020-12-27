@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
   projectInput.addEventListener("click", (e) => {
     if (e.target.className.includes("fa-check")) {
       TodoList.addProjectToLocalStorage();
-      TodoList.removeProjectInput();
     } else if (e.target.className.includes("fa-remove")) {
       TodoList.removeProjectInput();
     }
