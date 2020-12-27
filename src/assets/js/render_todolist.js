@@ -47,7 +47,7 @@ const TodoList = (() => {
   const renderProjectInput = (element) => {
     element.innerHTML = `
           <div data-bs-hover-animate="pulse" style="font-size: 20px;color: rgb(255,255,255);margin-left: -15px;padding-left: 20px;">
-          <div><input type="text" id="input" style="width: 120px;border-style: none;border-radius: 15px;margin-right: 10px;font-size: 12px;height: 35px;padding: 0 6px;" placeholder="Enter project name..."><i class="fa fa-check" id="project-check" style="margin-right: 7px;color: rgb(255,193,7);"></i><i class="fa fa-remove" id="project-remove" style="color: rgb(255,193,7);"></i></div>
+          <div><input type="text" id="input" style="width: 120px;border-style: none;border-radius: 15px;margin-right: 10px;font-size: 12px;height: 35px;padding: 0 6px;" placeholder="Enter project name..."><i class="fa fa-check" style="margin-right: 7px;color: rgb(255,193,7);"></i><i class="fa fa-remove" style="color: rgb(255,193,7);"></i></div>
           </div>
           `;
   };
@@ -137,11 +137,11 @@ const TodoList = (() => {
   `;
   };
 
-  const renderProject = (value, index) => {
+  const renderProject = (projectName, index) => {
     const ul = document.getElementById("project-list");
     ul.innerHTML += `
           <li class="font-weight-bold project-li cursor-pointer" data-bs-hover-animate="pulse" data-index="${index}"
-                style="font-size: 20px;margin-left: -15px;padding-left: 20px;">${value}<i class="fa fa-edit ml-4" style="color: rgb(255,193,7);"></i><i class="fa fa-trash"
+                style="font-size: 20px;margin-left: -15px;padding-left: 20px;">${projectName}<i class="fa fa-edit ml-4" style="color: rgb(255,193,7);"></i><i class="fa fa-trash"
                 style="color: rgb(255,193,7);"></i></li>
           `;
   };
@@ -287,17 +287,8 @@ const TodoList = (() => {
     });
   };
 
-  const editProject = (projectId, element) => {
-    element.remove();
-    const pid = projectId.split(",")[0];
-    const project = localStorage.getItem(`Project-${pid}`);
-    const parsedProject = JSON.parse(project);
-    parsedProject.tasks.forEach((task, index) => {
-      if (task.id == projectId) {
-        parsedProject.tasks.splice(index, 1);
-      }
-    });
-    localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
+  const editProject = (element) => {
+    const id = element.dataset.index;
   };
 
   const clickProjectEdit = () => {
@@ -305,7 +296,15 @@ const TodoList = (() => {
     check.addEventListener("click", (e) => {
       if (e.target.className.includes("fa-edit")) {
         const element = e.target.closest(".project-li");
+        const tmp = element.innerHTML;
         renderProjectInput(element);
+        element.addEventListener("click", (e) => {
+          if (e.target.className.includes("fa-check")) {
+            editProject(element);
+          } else if (e.target.className.includes("fa-remove")) {
+            element.innerHTML = tmp;
+          }
+        });
       }
     });
   };

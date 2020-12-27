@@ -26,15 +26,15 @@ const bodyBg = () => {
   document.body.style.backgroundSize = "auto, cover";
 };
 
-TodoList.clickCheckBox();
-TodoList.clickProjectEdit();
-TodoList.clickProjectRemove();
-TodoList.clickTaskRemove();
-
 document.addEventListener("DOMContentLoaded", () => {
   bodyBg();
+  TodoList.clickCheckBox();
+  TodoList.clickProjectEdit();
+  TodoList.clickProjectRemove();
+  TodoList.clickTaskRemove();
   TodoList.showAllTasks();
   TodoList.showProjects();
+
   const projectBtn = document.getElementById("project-btn");
   const projectInput = document.getElementById("project-input");
   const taskInput = document.getElementById("new-task-input");
@@ -54,20 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   projectInput.addEventListener("click", (e) => {
-    if (e.target.id === "project-check") {
+    if (e.target.className.includes("fa-check")) {
       TodoList.addProjectToLocalStorage();
       TodoList.removeProjectInput();
-    } else if (e.target.id === "project-remove") {
+    } else if (e.target.className.includes("fa-remove")) {
       TodoList.removeProjectInput();
     }
   });
 
   taskInput.addEventListener("click", (e) => {
-    if (e.target.id === "task-check") {
+    if (e.target.className.includes("fa-check")) {
       const { index } = document.querySelector(".active").dataset;
       TodoList.addTask(index);
       TodoList.removeTaskInput();
-    } else if (e.target.id === "task-remove") {
+    } else if (e.target.className.includes("fa-remove")) {
       TodoList.removeTaskInput();
     }
   });
@@ -82,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
       TodoList.addTaskBtn();
       const taskBtn = document.getElementById("task-btn");
       taskBtn.addEventListener("click", TodoList.renderTaskInput);
-    } else if (e.target.className.includes("fa-check")) {
     }
   });
 });
