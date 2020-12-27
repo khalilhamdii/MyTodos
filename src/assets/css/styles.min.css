@@ -2,6 +2,10 @@
   outline: none;
 }
 
+body {
+  min-width: 450px;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -319,4 +323,18 @@ span {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.fa-check,
+.fa-remove,
+.fa-edit,
+.fa-trash {
+  opacity: 0.5;
+}
+
+.fa-check:hover,
+.fa-remove:hover,
+.fa-edit:hover,
+.fa-trash:hover {
+  opacity: 1;
 }

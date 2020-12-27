@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   TodoList.clickCheckBox();
   TodoList.clickProjectEdit();
   TodoList.clickProjectRemove();
+  TodoList.clickTaskEdit();
   TodoList.clickTaskRemove();
   TodoList.showAllTasks();
   TodoList.showProjects();
@@ -80,7 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
       TodoList.showTasks(index);
       TodoList.addTaskBtn();
       const taskBtn = document.getElementById("task-btn");
-      taskBtn.addEventListener("click", TodoList.renderTaskInput);
+      const newTaskInput = document.getElementById("new-task-input");
+      taskBtn.addEventListener("click", () => {
+        TodoList.renderTaskInput(newTaskInput);
+      });
     }
   });
 });

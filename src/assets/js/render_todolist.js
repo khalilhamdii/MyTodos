@@ -52,11 +52,10 @@ const TodoList = (() => {
           `;
   };
 
-  const renderTaskInput = () => {
-    const taskInput = document.getElementById("new-task-input");
-    taskInput.innerHTML = `
-      <div class="row no-gutters d-flex flex-row"
-      style="margin: 5px;margin-top: 15px;color: rgb(255,255,255);background: rgba(23,162,184,0.5);border: 0.5px solid rgb(255,193,7) ;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);">
+  const renderTaskInput = (element) => {
+    element.innerHTML = `
+      <div class="row no-gutters d-flex flex-row w-100"
+      style="color: rgb(255,255,255);background: rgba(23,162,184,0.5);border: 0.5px solid rgb(255,193,7) ;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);">
       <div class="col-4 col-sm-5 col-md-6 col-lg-5 d-flex justify-content-start align-items-center"><input id="task_title"
           type="text" class="w-100"
           style="border-style: none;padding-left: 20px;border-radius: 15px;line-height: 30px;background: rgb(255,193,7);height: 32px;"
@@ -102,15 +101,15 @@ const TodoList = (() => {
     };
     const lineThroughstyle = () => {
       if (obj.status === false) {
-        return "text-decoration: line-through;";
+        return "text-decoration: line-through;opacity: 0.5;";
       }
       return "";
     };
     tasks.innerHTML += `
       <div data-id="${
         obj.id
-      }" class="task-target row no-gutters d-flex flex-row" data-bs-hover-animate="pulse"
-  style="margin: 5px;margin-top: 15px;color: rgb(255,255,255);border-width: 0.5px;border-style: none;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);${lineThroughstyle()}">
+      }" class="task-target row no-gutters d-flex flex-row""
+  style="color: rgb(255,255,255);border-width: 0.5px;border-style: none;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);${lineThroughstyle()}">
   <div class="col-4 col-sm-5 col-md-6 col-lg-5 d-flex justify-content-start align-items-center">
     <div class="form-check"><input class="form-check-input d-lg-flex align-items-lg-center" type="checkbox"
         id="formCheck-6" style="border-radius: 0px;" ${checkBox()} ><label
@@ -220,9 +219,11 @@ const TodoList = (() => {
   const strikeThrough = (task, element) => {
     if (task.status === false) {
       element.style.textDecoration = "line-through";
+      element.style.opacity = "0.5";
       element.querySelector(".form-check-input").checked = true;
     } else {
       element.style.textDecoration = "none";
+      element.style.opacity = "1";
       element.querySelector(".form-check-input").checked = false;
     }
   };
@@ -270,6 +271,42 @@ const TodoList = (() => {
     }
   };
 
+  const editTask = (element) => {
+    const id = element.dataset.index;
+    const projectName = element.querySelector("input").value;
+    if (projectName.length > 3) {
+      const project = localStorage.getItem(`Project-${id}`);
+      const parsedProject = JSON.parse(project);
+      parsedProject.name = projectName;
+      localStorage[`Project-${id}`] = JSON.stringify(parsedProject);
+      location.reload();
+    } else {
+      renderProjectInput(element);
+    }
+  };
+
+  const clickTaskEdit = () => {
+    const taskList = document.querySelector("#tasks");
+    taskList.addEventListener("click", (e) => {
+      if (e.target.className.includes("fa-edit")) {
+        const element = e.target.closest(".task-target");
+        const tmp = element.cloneNode(true);
+        element.style.textDecoration = "none";
+        element.style.opacity = "1";
+        renderTaskInput(element);
+        element.addEventListener("click", (e) => {
+          if (e.target.className.includes("fa-check")) {
+            editTask(element);
+          } else if (e.target.className.includes("fa-remove")) {
+            element.style.opacity = tmp.style.opacity;
+            element.style.textDecoration = tmp.style.textDecoration;
+            element.innerHTML = tmp.innerHTML;
+          }
+        });
+      }
+    });
+  };
+
   const removeTask = (taskId, element) => {
     element.remove();
     const pid = taskId.split(",")[0];
@@ -308,8 +345,8 @@ const TodoList = (() => {
   };
 
   const clickProjectEdit = () => {
-    const check = document.querySelector("#project-list");
-    check.addEventListener("click", (e) => {
+    const projectList = document.querySelector("#project-list");
+    projectList.addEventListener("click", (e) => {
       if (e.target.className.includes("fa-edit")) {
         const element = e.target.closest(".project-li");
         const tmp = element.innerHTML;
@@ -348,6 +385,7 @@ const TodoList = (() => {
     removeTaskInput,
     clickProjectEdit,
     clickProjectRemove,
+    clickTaskEdit,
     clickTaskRemove,
     addProjectToLocalStorage,
     addTask,
