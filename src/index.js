@@ -26,42 +26,48 @@ const bodyBg = () => {
   document.body.style.backgroundSize = 'auto, cover';
 };
 
-TodoList.clickCheckBox();
-
 document.addEventListener('DOMContentLoaded', () => {
   bodyBg();
+  TodoList.clickCheckBox();
+  TodoList.clickProjectEdit();
+  TodoList.clickProjectRemove();
+  TodoList.clickTaskEdit();
+  TodoList.clickTaskRemove();
   TodoList.showAllTasks();
   TodoList.showProjects();
+
   const projectBtn = document.getElementById('project-btn');
   const projectInput = document.getElementById('project-input');
   const taskInput = document.getElementById('new-task-input');
   const home = document.getElementById('home');
+  home.classList.add('active');
   home.addEventListener('click', () => {
     const btn = document.getElementById('taskDivBtn');
     btn.innerHTML = '';
     home.classList.add('active');
-    const projectLis = document.querySelectorAll('.project-li');
-    projectLis.forEach((item) => item.classList.remove('active'));
+    const projectList = document.querySelectorAll('.project-li');
+    projectList.forEach((item) => item.classList.remove('active'));
     TodoList.showAllTasks();
   });
 
-  projectBtn.addEventListener('click', TodoList.renderProjectInput);
+  projectBtn.addEventListener('click', () => {
+    TodoList.renderProjectInput(projectInput);
+  });
 
   projectInput.addEventListener('click', (e) => {
-    if (e.target.id === 'project-check') {
+    if (e.target.className.includes('fa-check')) {
       TodoList.addProjectToLocalStorage();
-      TodoList.removeProjectInput();
-    } else if (e.target.id === 'project-remove') {
+    } else if (e.target.className.includes('fa-remove')) {
       TodoList.removeProjectInput();
     }
   });
 
   taskInput.addEventListener('click', (e) => {
-    if (e.target.id === 'task-check') {
+    if (e.target.className.includes('fa-check')) {
       const { index } = document.querySelector('.active').dataset;
       TodoList.addTask(index);
       TodoList.removeTaskInput();
-    } else if (e.target.id === 'task-remove') {
+    } else if (e.target.className.includes('fa-remove')) {
       TodoList.removeTaskInput();
     }
   });
@@ -75,7 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
       TodoList.showTasks(index);
       TodoList.addTaskBtn();
       const taskBtn = document.getElementById('task-btn');
-      taskBtn.addEventListener('click', TodoList.renderTaskInput);
+      const newTaskInput = document.getElementById('new-task-input');
+      taskBtn.addEventListener('click', () => {
+        TodoList.renderTaskInput(newTaskInput);
+      });
     }
   });
 });
