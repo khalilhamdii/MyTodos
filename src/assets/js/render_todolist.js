@@ -91,8 +91,7 @@ const TodoList = (() => {
     header.innerHTML = `MyTodos | ${project.name}`;
   };
 
-  const renderTask = (obj) => {
-    const tasks = document.getElementById("tasks");
+  const renderTask = (element, obj) => {
     const checkBox = () => {
       if (obj.status === false) {
         return "checked";
@@ -105,10 +104,10 @@ const TodoList = (() => {
       }
       return "";
     };
-    tasks.innerHTML += `
+    element.innerHTML += `
       <div data-id="${
         obj.id
-      }" class="task-target row no-gutters d-flex flex-row""
+      }" class="task-target row no-gutters d-flex flex-row w-100"
   style="color: rgb(255,255,255);border-width: 0.5px;border-style: none;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);${lineThroughstyle()}">
   <div class="col-4 col-sm-5 col-md-6 col-lg-5 d-flex justify-content-start align-items-center">
     <div class="form-check"><input class="form-check-input d-lg-flex align-items-lg-center" type="checkbox"
@@ -192,7 +191,8 @@ const TodoList = (() => {
     const parsedLsProject = JSON.parse(lsProject);
     parsedLsProject.tasks.push(taskObj);
     localStorage[`Project-${index}`] = JSON.stringify(parsedLsProject);
-    renderTask(taskObj);
+    const tasks = document.getElementById("tasks");
+    renderTask(tasks, taskObj);
   };
 
   const showProjects = () => {
@@ -212,7 +212,7 @@ const TodoList = (() => {
     const value = localStorage.getItem(`Project-${index}`);
     const project = JSON.parse(value);
     for (let i = 0; i < project.tasks.length; i += 1) {
-      renderTask(project.tasks[i]);
+      renderTask(tasks, project.tasks[i]);
     }
   };
 
@@ -267,19 +267,30 @@ const TodoList = (() => {
     tasks.innerHTML = "";
 
     for (let i = 0; i < taskArr.length; i += 1) {
-      renderTask(taskArr[i]);
+      renderTask(tasks, taskArr[i]);
     }
   };
 
-  const editTask = (element) => {
-    const id = element.dataset.index;
-    const projectName = element.querySelector("input").value;
-    if (projectName.length > 3) {
-      const project = localStorage.getItem(`Project-${id}`);
+  const editTask = (element, obj) => {
+    const taskId = element.dataset.id;
+    const pid = taskId.split(",")[0];
+
+    if (obj.title.length > 3 && obj.priority && obj.date) {
+      const project = localStorage.getItem(`Project-${pid}`);
       const parsedProject = JSON.parse(project);
-      parsedProject.name = projectName;
-      localStorage[`Project-${id}`] = JSON.stringify(parsedProject);
-      location.reload();
+      parsedProject.tasks.forEach((task) => {
+        if (task.id == taskId) {
+          task.title = obj.title;
+          task.priority = obj.priority;
+          task.date = obj.date;
+        }
+      });
+      localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
+      element.innerHTML = "";
+      obj.id = taskId;
+      renderTask(element, obj);
+      const tmp = element.cloneNode(true);
+      element.outerHTML = tmp.children[0].outerHTML;
     } else {
       renderProjectInput(element);
     }
@@ -296,7 +307,11 @@ const TodoList = (() => {
         renderTaskInput(element);
         element.addEventListener("click", (e) => {
           if (e.target.className.includes("fa-check")) {
-            editTask(element);
+            const title = element.querySelector("#task_title").value;
+            const priority = element.querySelector("#task_priority").value;
+            const date = element.querySelector("#task_date").value;
+            const obj = { title: title, priority: priority, date: date };
+            editTask(element, obj);
           } else if (e.target.className.includes("fa-remove")) {
             element.style.opacity = tmp.style.opacity;
             element.style.textDecoration = tmp.style.textDecoration;
