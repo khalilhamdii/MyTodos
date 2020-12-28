@@ -181,11 +181,7 @@ li {
     line-height: 1;
   }
 
-  .navigation-clean.navbar-dark
-    .navbar-nav
-    .show
-    .dropdown-menu
-    .dropdown-item {
+  .navigation-clean.navbar-dark .navbar-nav .show .dropdown-menu .dropdown-item {
     color: #fff;
   }
 }
