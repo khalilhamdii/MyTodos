@@ -330,6 +330,7 @@ span {
 .fa-edit,
 .fa-trash {
   opacity: 0.5;
+  cursor: pointer;
 }
 
 .fa-check:hover,
