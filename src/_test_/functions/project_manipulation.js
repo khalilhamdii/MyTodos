@@ -1,14 +1,9 @@
-import { addProjectCount } from "../functions/helpers";
+import { Project } from "../functions/constructors";
 
 export const addProjectToLocalStorage = (name, count) => {
-  if (name.length > 3) {
-    const project = new Project(name);
-    const counter = count;
-    localStorage.setItem(`Project-${counter}`, JSON.stringify(project));
-  } else {
-    const projectInput = document.getElementById("project-input");
-    renderProjectInput(projectInput);
-  }
+  const project = new Project(name);
+  const counter = count;
+  localStorage.setItem(`Project-${counter}`, JSON.stringify(project));
 };
 
 export const clickProjectRemove = () => {
