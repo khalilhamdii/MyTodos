@@ -1,19 +1,18 @@
-const addTask = (index) => {
-  const title = document.getElementById("task_title").value;
-  const priority = document.getElementById("task_priority").value;
-  const date = document.getElementById("task_date").value;
-  const taskCounter = addTaskCount();
-  const id = [index, taskCounter.toString()];
+import { Task } from './constructors'
+export const addTask = (obj, index, counter) => {
+  const title = obj.title;
+  const priority = obj.priority;
+  const date = obj.date;
+  const taskCounter = counter;
+  const id = [index, taskCounter];
   const taskObj = new Task(title, priority, date, id);
   const lsProject = localStorage.getItem(`Project-${index}`);
   const parsedLsProject = JSON.parse(lsProject);
   parsedLsProject.tasks.push(taskObj);
   localStorage[`Project-${index}`] = JSON.stringify(parsedLsProject);
-  const tasks = document.getElementById("tasks");
-  renderTask(tasks, taskObj);
 };
 
-const removeTask = (taskId, element) => {
+export const removeTask = (taskId, element) => {
   element.remove();
   const pid = taskId.split(",")[0];
   const project = localStorage.getItem(`Project-${pid}`);
@@ -26,7 +25,7 @@ const removeTask = (taskId, element) => {
   localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
 };
 
-const editTask = (element, obj) => {
+export const editTask = (element, obj) => {
   const taskId = element.dataset.id;
   const pid = taskId.split(",")[0];
 
@@ -51,7 +50,7 @@ const editTask = (element, obj) => {
   }
 };
 
-const showTasks = (index) => {
+export const showTasks = (index) => {
   const tasks = document.getElementById("tasks");
   tasks.innerHTML = "";
   const value = localStorage.getItem(`Project-${index}`);
@@ -61,7 +60,7 @@ const showTasks = (index) => {
   }
 };
 
-const showAllTasks = () => {
+export const showAllTasks = () => {
   const header = document.getElementById("header").querySelector("h3");
   header.innerHTML = "MyTodos | Home";
   const taskArr = [];
@@ -80,7 +79,7 @@ const showAllTasks = () => {
   }
 };
 
-const renderLineThrough = (taskId, element) => {
+export const renderLineThrough = (taskId, element) => {
   const pid = taskId.split(",")[0];
   const project = localStorage.getItem(`Project-${pid}`);
   const parsedProject = JSON.parse(project);
