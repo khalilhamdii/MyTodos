@@ -17,3 +17,10 @@ test("Expect function to edit project in local storage", ()=>{
   const parsedProject = JSON.parse(localproject)
   expect(parsedProject.name).toEqual("Project 11")  
 })
+
+test("Expects function to delete project", ()=> {
+  localStorage.setItem("projectCounter", "0");
+  project.addProjectToLocalStorage("Project 1", 1);
+  project.clickProjectRemove(1)
+  expect(localStorage.length).toEqual(1)
+})

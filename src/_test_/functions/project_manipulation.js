@@ -6,17 +6,8 @@ export const addProjectToLocalStorage = (name, count) => {
   localStorage.setItem(`Project-${counter}`, JSON.stringify(project));
 };
 
-export const clickProjectRemove = () => {
-  const check = document.querySelector("#project-list");
-  check.addEventListener("click", (e) => {
-    if (e.target.className.includes("fa-trash")) {
-      const element = e.target.closest(".project-li");
-      const { index } = element.dataset;
+export const clickProjectRemove = (index) => {
       localStorage.removeItem(`Project-${index}`);
-      element.remove();
-      location.reload();
-    }
-  });
 };
 
 export const editProject = (element, name) => {
