@@ -26,7 +26,7 @@ export const removeTask = (taskId) => {
 
 export const editTask = (element, obj) => {
   const taskId = element.dataset.id;
-  const pid = taskId.split(",")[0];
+  const pid = taskId[0];
 
   if (obj.title.length > 3 && obj.priority && obj.date) {
     const project = localStorage.getItem(`Project-${pid}`);
@@ -39,13 +39,6 @@ export const editTask = (element, obj) => {
       }
     });
     localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
-    element.innerHTML = "";
-    obj.id = taskId;
-    renderTask(element, obj);
-    const tmp = element.cloneNode(true);
-    element.outerHTML = tmp.children[0].outerHTML;
-  } else {
-    renderProjectInput(element);
   }
 };
 

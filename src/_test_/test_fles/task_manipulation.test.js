@@ -39,3 +39,30 @@ describe("Testing removeTask function", () => {
     expect(parsedProject.tasks.length).not.toEqual(1);
   });
 });
+
+describe("Testing editTask function", () => {
+  addProjectToLocalStorage("Project 1", 1);
+  const obj = { title: "working out", priority: "High", date: "12/13/2020" };
+  const newObj = {
+    title: "Running",
+    priority: "Very High",
+    date: "12/15/2020",
+  };
+  const fakeElement = { dataset: { id: "1,1" } };
+  task.addTask(obj, 1, 1);
+  task.editTask(fakeElement, newObj);
+  const firstProject = localStorage.getItem("Project-1");
+  const parsedProject = JSON.parse(firstProject);
+
+  test("Expect edited task to contain the new data", () => {
+    expect(parsedProject.tasks[0].title).toEqual("Running");
+    expect(parsedProject.tasks[0].priority).toEqual("Very High");
+    expect(parsedProject.tasks[0].date).toEqual("12/15/2020");
+  });
+
+  test("Expect task data no to stay the same", () => {
+    expect(parsedProject.tasks[0].title).not.toEqual("working out");
+    expect(parsedProject.tasks[0].priority).not.toEqual("High");
+    expect(parsedProject.tasks[0].date).not.toEqual("12/13/2020");
+  });
+});

@@ -1,3 +1,5 @@
+import { type } from "jquery";
+
 /* eslint-disable no-restricted-globals */
 const TodoList = (() => {
   // Constructors start
