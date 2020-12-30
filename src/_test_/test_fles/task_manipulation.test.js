@@ -66,3 +66,27 @@ describe("Testing editTask function", () => {
     expect(parsedProject.tasks[0].date).not.toEqual("12/13/2020");
   });
 });
+
+
+describe("Test render line through", () => {
+  addProjectToLocalStorage("Project 1", 1);
+  const obj = { title: "working out", priority: "High", date: "12/13/2020" };
+  task.addTask(obj, 1, 1);
+  task.renderLineThrough("1,1");
+  const firstProject = localStorage.getItem("Project-1");
+  const parsedProject = JSON.parse(firstProject);
+
+  test("Expect edited task to be false", () => {
+    expect(parsedProject.tasks[0].status).toEqual(false);
+  });
+
+  test("Expect edited task to not be true", () => {
+    expect(parsedProject.tasks[0].status).not.toEqual(true);
+  });
+
+  // test("Expect task data no to stay the same", () => {
+  //   expect(parsedProject.tasks[0].title).not.toEqual("working out");
+  //   expect(parsedProject.tasks[0].priority).not.toEqual("High");
+  //   expect(parsedProject.tasks[0].date).not.toEqual("12/13/2020");
+  // });
+});

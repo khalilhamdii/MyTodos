@@ -71,7 +71,7 @@ export const showAllTasks = () => {
   }
 };
 
-export const renderLineThrough = (taskId, element) => {
+export const renderLineThrough = (taskId) => {
   const pid = taskId.split(",")[0];
   const project = localStorage.getItem(`Project-${pid}`);
   const parsedProject = JSON.parse(project);
@@ -79,7 +79,6 @@ export const renderLineThrough = (taskId, element) => {
     if (task.id == taskId) {
       task.status = !task.status;
       parsedProject.tasks[index] = task;
-      strikeThrough(task, element);
     }
   });
   localStorage[`Project-${pid}`] = JSON.stringify(parsedProject);
