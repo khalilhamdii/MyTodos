@@ -19,13 +19,12 @@ export const clickProjectRemove = () => {
   });
 };
 
-export const editProject = (element) => {
+export const editProject = (element, name) => {
   const id = element.dataset.index;
-  const projectName = element.querySelector("input").value;
-  if (projectName.length > 3) {
+  if (name.length > 3) {
     const project = localStorage.getItem(`Project-${id}`);
     const parsedProject = JSON.parse(project);
-    parsedProject.name = projectName;
+    parsedProject.name = name;
     localStorage[`Project-${id}`] = JSON.stringify(parsedProject);
     location.reload();
   } else {

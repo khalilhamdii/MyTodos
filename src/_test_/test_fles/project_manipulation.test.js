@@ -7,3 +7,13 @@ test("Expect function to add project to local storage", () => {
   const parsedProject = JSON.parse(projectName);
   expect(parsedProject.name).toEqual("Project 1");
 });
+
+test("Expect function to edit project in local storage", ()=>{
+  localStorage.setItem("projectCounter", "0");
+  project.addProjectToLocalStorage("Project 1", 1);
+  const fakeElement = { dataset: {index: 1} }
+  project.editProject(fakeElement, "Project 11")
+  const localproject = localStorage.getItem("Project-1");
+  const parsedProject = JSON.parse(localproject)
+  expect(parsedProject.name).toEqual("Project 11")  
+})
