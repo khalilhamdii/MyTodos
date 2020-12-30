@@ -1,4 +1,4 @@
-import { Task } from './constructors'
+import { Task } from "./constructors";
 export const addTask = (obj, index, counter) => {
   const title = obj.title;
   const priority = obj.priority;
@@ -12,9 +12,8 @@ export const addTask = (obj, index, counter) => {
   localStorage[`Project-${index}`] = JSON.stringify(parsedLsProject);
 };
 
-export const removeTask = (taskId, element) => {
-  element.remove();
-  const pid = taskId.split(",")[0];
+export const removeTask = (taskId) => {
+  const pid = taskId[0];
   const project = localStorage.getItem(`Project-${pid}`);
   const parsedProject = JSON.parse(project);
   parsedProject.tasks.forEach((task, index) => {

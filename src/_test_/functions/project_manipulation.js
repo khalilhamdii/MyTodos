@@ -7,7 +7,7 @@ export const addProjectToLocalStorage = (name, count) => {
 };
 
 export const clickProjectRemove = (index) => {
-      localStorage.removeItem(`Project-${index}`);
+  localStorage.removeItem(`Project-${index}`);
 };
 
 export const editProject = (element, name) => {
@@ -17,8 +17,5 @@ export const editProject = (element, name) => {
     const parsedProject = JSON.parse(project);
     parsedProject.name = name;
     localStorage[`Project-${id}`] = JSON.stringify(parsedProject);
-    location.reload();
-  } else {
-    renderProjectInput(element);
   }
 };

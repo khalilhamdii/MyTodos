@@ -324,6 +324,7 @@ const TodoList = (() => {
   };
 
   const removeTask = (taskId, element) => {
+    console.log(taskId);
     element.remove();
     const pid = taskId.split(",")[0];
     const project = localStorage.getItem(`Project-${pid}`);
