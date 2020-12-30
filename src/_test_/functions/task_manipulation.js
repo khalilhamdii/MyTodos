@@ -1,8 +1,10 @@
-import { Task } from "./constructors";
+/* eslint-disable eqeqeq */
+import { Task } from './constructors';
+
 export const addTask = (obj, index, counter) => {
-  const title = obj.title;
-  const priority = obj.priority;
-  const date = obj.date;
+  const { title } = obj;
+  const { priority } = obj;
+  const { date } = obj;
   const taskCounter = counter;
   const id = [index, taskCounter];
   const taskObj = new Task(title, priority, date, id);
@@ -43,36 +45,17 @@ export const editTask = (element, obj) => {
 };
 
 export const showTasks = (index) => {
-  const tasks = document.getElementById("tasks");
-  tasks.innerHTML = "";
   const value = localStorage.getItem(`Project-${index}`);
   const project = JSON.parse(value);
+  const arr = [];
   for (let i = 0; i < project.tasks.length; i += 1) {
-    renderTask(tasks, project.tasks[i]);
+    arr.push(project.tasks[i]);
   }
-};
-
-export const showAllTasks = () => {
-  const header = document.getElementById("header").querySelector("h3");
-  header.innerHTML = "MyTodos | Home";
-  const taskArr = [];
-  for (let i = 0; i < localStorage.length; i += 1) {
-    const key = localStorage.key(i);
-    if (key.startsWith("Project-")) {
-      const value = JSON.parse(localStorage[key]);
-      value.tasks.forEach((task) => taskArr.push(task));
-    }
-  }
-  const tasks = document.getElementById("tasks");
-  tasks.innerHTML = "";
-
-  for (let i = 0; i < taskArr.length; i += 1) {
-    renderTask(tasks, taskArr[i]);
-  }
+  return arr;
 };
 
 export const renderLineThrough = (taskId) => {
-  const pid = taskId.split(",")[0];
+  const pid = taskId.split(',')[0];
   const project = localStorage.getItem(`Project-${pid}`);
   const parsedProject = JSON.parse(project);
   parsedProject.tasks.forEach((task, index) => {

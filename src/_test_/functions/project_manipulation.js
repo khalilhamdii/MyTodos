@@ -1,4 +1,4 @@
-import { Project } from "../functions/constructors";
+import { Project } from './constructors';
 
 export const addProjectToLocalStorage = (name, count) => {
   const project = new Project(name);
