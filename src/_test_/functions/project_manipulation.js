@@ -1,18 +1,17 @@
-const addProjectToLocalStorage = () => {
-  const name = document.getElementById("input").value;
+import { addProjectCount } from "../functions/helpers";
+
+export const addProjectToLocalStorage = (name, count) => {
   if (name.length > 3) {
     const project = new Project(name);
-    const counter = addProjectCount();
+    const counter = count;
     localStorage.setItem(`Project-${counter}`, JSON.stringify(project));
-    renderProject(name, counter);
-    removeProjectInput();
   } else {
     const projectInput = document.getElementById("project-input");
     renderProjectInput(projectInput);
   }
 };
 
-const clickProjectRemove = () => {
+export const clickProjectRemove = () => {
   const check = document.querySelector("#project-list");
   check.addEventListener("click", (e) => {
     if (e.target.className.includes("fa-trash")) {
@@ -25,7 +24,7 @@ const clickProjectRemove = () => {
   });
 };
 
-const editProject = (element) => {
+export const editProject = (element) => {
   const id = element.dataset.index;
   const projectName = element.querySelector("input").value;
   if (projectName.length > 3) {
