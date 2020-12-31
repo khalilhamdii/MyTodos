@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import { Task } from './constructors';
+import * as constructors from "../../assets/js/constructors";
 
 export const addTask = (obj, index, counter) => {
   const { title } = obj;
@@ -7,7 +7,7 @@ export const addTask = (obj, index, counter) => {
   const { date } = obj;
   const taskCounter = counter;
   const id = [index, taskCounter];
-  const taskObj = new Task(title, priority, date, id);
+  const taskObj = new constructors.Task(title, priority, date, id);
   const lsProject = localStorage.getItem(`Project-${index}`);
   const parsedLsProject = JSON.parse(lsProject);
   parsedLsProject.tasks.push(taskObj);
@@ -55,7 +55,7 @@ export const showTasks = (index) => {
 };
 
 export const renderLineThrough = (taskId) => {
-  const pid = taskId.split(',')[0];
+  const pid = taskId.split(",")[0];
   const project = localStorage.getItem(`Project-${pid}`);
   const parsedProject = JSON.parse(project);
   parsedProject.tasks.forEach((task, index) => {

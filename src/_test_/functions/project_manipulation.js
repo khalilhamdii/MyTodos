@@ -1,7 +1,7 @@
-import { Project } from './constructors';
+import * as constructors from "../../assets/js/constructors";
 
 export const addProjectToLocalStorage = (name, count) => {
-  const project = new Project(name);
+  const project = new constructors.Project(name);
   const counter = count;
   localStorage.setItem(`Project-${counter}`, JSON.stringify(project));
 };
