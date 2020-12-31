@@ -5,8 +5,7 @@ import { addProjectCount } from "./helpers";
 const ProjectManipulation = (() => {
   const removeProjectInput = () => {
     const inputDiv = document.getElementById("project-input");
-    const div = inputDiv.children[Array.from(inputDiv.children).length - 1];
-    inputDiv.removeChild(div);
+    inputDiv.innerHTML = ``;
   };
 
   const addProjectToLocalStorage = () => {
@@ -42,7 +41,7 @@ const ProjectManipulation = (() => {
       const parsedProject = JSON.parse(project);
       parsedProject.name = projectName;
       localStorage[`Project-${id}`] = JSON.stringify(parsedProject);
-      location.reload();
+      // location.reload();
     } else {
       DomManipulation.renderProjectInput(element);
     }
@@ -71,10 +70,10 @@ const ProjectManipulation = (() => {
     check.addEventListener("click", (e) => {
       if (e.target.className.includes("fa-trash")) {
         const element = e.target.closest(".project-li");
-        const { index } = element.dataset;
+        const index = element.dataset.index;
         localStorage.removeItem(`Project-${index}`);
         element.remove();
-        location.reload();
+        // location.reload();
       }
     });
   };

@@ -1,4 +1,4 @@
-import * as constructors from "../../assets/js/constructors";
+import * as constructors from "../assets/js/constructors";
 
 test("Expect Project constructor to create a new project object", () => {
   const newProject = new constructors.Project("Some Project");
