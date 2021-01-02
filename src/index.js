@@ -1,7 +1,10 @@
 // import start
 
 import './assets/css/styles.min.css';
-import TodoList from './assets/js/render_todolist';
+import DomManipulation from './assets/js/dom_manipulation';
+import ProjectManipulation from './assets/js/project_manipulation';
+import TaskManipulation from './assets/js/task_manipulation';
+import { getProjectIndex, activeProject } from './assets/js/helpers';
 
 const importAll = (r) => r.keys().map(r);
 importAll(require.context('./assets/js/', true, /\.js$/));
@@ -28,13 +31,13 @@ const bodyBg = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   bodyBg();
-  TodoList.clickCheckBox();
-  TodoList.clickProjectEdit();
-  TodoList.clickProjectRemove();
-  TodoList.clickTaskEdit();
-  TodoList.clickTaskRemove();
-  TodoList.showAllTasks();
-  TodoList.showProjects();
+  TaskManipulation.clickCheckBox();
+  ProjectManipulation.clickProjectEdit();
+  ProjectManipulation.clickProjectRemove();
+  TaskManipulation.clickTaskEdit();
+  TaskManipulation.clickTaskRemove();
+  TaskManipulation.showAllTasks();
+  ProjectManipulation.showProjects();
 
   const projectBtn = document.getElementById('project-btn');
   const projectInput = document.getElementById('project-input');
@@ -47,43 +50,43 @@ document.addEventListener('DOMContentLoaded', () => {
     home.classList.add('active');
     const projectList = document.querySelectorAll('.project-li');
     projectList.forEach((item) => item.classList.remove('active'));
-    TodoList.showAllTasks();
+    TaskManipulation.showAllTasks();
   });
 
   projectBtn.addEventListener('click', () => {
-    TodoList.renderProjectInput(projectInput);
+    DomManipulation.renderProjectInput(projectInput);
   });
 
   projectInput.addEventListener('click', (e) => {
     if (e.target.className.includes('fa-check')) {
-      TodoList.addProjectToLocalStorage();
+      ProjectManipulation.addProjectToLocalStorage();
     } else if (e.target.className.includes('fa-remove')) {
-      TodoList.removeProjectInput();
+      ProjectManipulation.removeProjectInput();
     }
   });
 
   taskInput.addEventListener('click', (e) => {
     if (e.target.className.includes('fa-check')) {
       const { index } = document.querySelector('.active').dataset;
-      TodoList.addTask(index);
-      TodoList.removeTaskInput();
+      TaskManipulation.addTask(index);
+      TaskManipulation.removeTaskInput();
     } else if (e.target.className.includes('fa-remove')) {
-      TodoList.removeTaskInput();
+      TaskManipulation.removeTaskInput();
     }
   });
 
   const ul = document.getElementById('project-list');
   ul.addEventListener('click', (e) => {
     if (e.target.tagName === 'LI') {
-      const index = TodoList.getProjectIndex(e.target);
-      TodoList.activeProject(e.target);
-      TodoList.renderHeader(index);
-      TodoList.showTasks(index);
-      TodoList.addTaskBtn();
+      const index = getProjectIndex(e.target);
+      activeProject(e.target);
+      DomManipulation.renderHeader(index);
+      TaskManipulation.showTasks(index);
+      DomManipulation.addTaskBtn();
       const taskBtn = document.getElementById('task-btn');
       const newTaskInput = document.getElementById('new-task-input');
       taskBtn.addEventListener('click', () => {
-        TodoList.renderTaskInput(newTaskInput);
+        DomManipulation.renderTaskInput(newTaskInput);
       });
     }
   });
