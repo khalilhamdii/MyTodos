@@ -41,7 +41,7 @@ const ProjectManipulation = (() => {
       const parsedProject = JSON.parse(project);
       parsedProject.name = projectName;
       localStorage[`Project-${id}`] = JSON.stringify(parsedProject);
-      // location.reload();
+      location.reload();
     } else {
       DomManipulation.renderProjectInput(element);
     }
@@ -73,7 +73,7 @@ const ProjectManipulation = (() => {
         const index = element.dataset.index;
         localStorage.removeItem(`Project-${index}`);
         element.remove();
-        // location.reload();
+        location.reload();
       }
     });
   };

@@ -23,7 +23,7 @@ const DomManipulation = (() => {
         style="padding-right: 5px;padding-left: 5px;"><select id="task_priority" class="w-100"
           style="background: transparent;color: rgb(255,193,7);border-style: none;">
           <option  value="undefined">Priority</option>
-          <option value="Very High">Very High</optionvalue=>
+          <option value="Very High">Very High</option>
           <option value="High">High</option>
           <option  value="Medium">Medium</option>
           <option  value="Low">Low</option>
