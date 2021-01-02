@@ -1,6 +1,3 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable eqeqeq */
-
 const DomManipulation = (() => {
   const renderProjectInput = (element) => {
     element.innerHTML = `
@@ -45,34 +42,34 @@ const DomManipulation = (() => {
   const renderHeader = (index) => {
     const value = localStorage.getItem(`Project-${index}`);
     const project = JSON.parse(value);
-    const header = document.getElementById("header").querySelector("h3");
+    const header = document.getElementById('header').querySelector('h3');
     header.innerHTML = `MyTodos | ${project.name}`;
   };
 
   const renderTask = (element, obj) => {
     const checkBox = () => {
       if (obj.status === false) {
-        return "checked";
+        return 'checked';
       }
-      return "";
+      return '';
     };
     const lineThroughstyle = () => {
       if (obj.status === false) {
-        return "text-decoration: line-through;opacity: 0.5;";
+        return 'text-decoration: line-through;opacity: 0.5;';
       }
-      return "";
+      return '';
     };
     element.innerHTML += `
       <div data-id="${
-        obj.id
-      }" class="task-target row no-gutters d-flex flex-row w-100"
+  obj.id
+  }" class="task-target row no-gutters d-flex flex-row w-100"
   style="color: rgb(255,255,255);border-width: 0.5px;border-style: none;border-bottom-style: solid;border-bottom-color: rgb(255,193,7);${lineThroughstyle()}">
   <div class="col-4 col-sm-5 col-md-6 col-lg-5 d-flex justify-content-start align-items-center">
     <div class="form-check"><input class="form-check-input d-lg-flex align-items-lg-center" type="checkbox"
         id="formCheck-6" style="border-radius: 0px;" ${checkBox()} ><label
         class="form-check-label d-lg-flex align-items-lg-center" for="formCheck-1"><strong>${
-          obj.title
-        }</strong></label></div>
+  obj.title
+  }</strong></label></div>
   </div>
   <div
     class="col-2 col-sm-2 col-md-2 col-lg-2 d-flex d-md-flex d-lg-flex justify-content-sm-center justify-content-md-center justify-content-lg-center">
@@ -81,8 +78,8 @@ const DomManipulation = (() => {
   <div
     class="col-4 col-sm-3 col-md-3 col-lg-4 d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center">
     <span class="d-flex justify-content-center align-items-center">${
-      obj.date
-    }</span>
+  obj.date
+  }</span>
   </div>
   <div
   class="col-2 col-md-1 col-lg-1 d-flex d-md-flex d-lg-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center">
@@ -94,7 +91,7 @@ const DomManipulation = (() => {
   };
 
   const renderProject = (projectName, index) => {
-    const ul = document.getElementById("project-list");
+    const ul = document.getElementById('project-list');
     ul.innerHTML += `
           <li class="font-weight-bold project-li cursor-pointer" data-bs-hover-animate="pulse" data-index="${index}"
                 style="font-size: 20px;margin-left: -15px;padding-left: 20px;">${projectName} <i class="fa fa-edit fa-xs ml-2" style="color: rgb(255,193,7);"></i><i class="fa fa-trash fa-xs"
@@ -103,7 +100,7 @@ const DomManipulation = (() => {
   };
 
   const addTaskBtn = () => {
-    const div = document.getElementById("taskDivBtn");
+    const div = document.getElementById('taskDivBtn');
     div.innerHTML = `
     <button id="task-btn" class="btn btn-warning btn-sm float-right" type="button" style="margin-top: 30px;"><i
             class="fa fa-plus"></i><span>Add a new task</span></button>

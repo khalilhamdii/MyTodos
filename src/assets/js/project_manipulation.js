@@ -1,15 +1,16 @@
-import DomManipulation from "./dom_manipulation";
-import * as constructors from "./constructors";
-import { addProjectCount } from "./helpers";
+/* eslint-disable no-restricted-globals */
+import DomManipulation from './dom_manipulation';
+import * as constructors from './constructors';
+import { addProjectCount } from './helpers';
 
 const ProjectManipulation = (() => {
   const removeProjectInput = () => {
-    const inputDiv = document.getElementById("project-input");
-    inputDiv.innerHTML = ``;
+    const inputDiv = document.getElementById('project-input');
+    inputDiv.innerHTML = '';
   };
 
   const addProjectToLocalStorage = () => {
-    const name = document.getElementById("input").value;
+    const name = document.getElementById('input').value;
     if (name.length > 3) {
       const project = new constructors.Project(name);
       const counter = addProjectCount();
@@ -17,7 +18,7 @@ const ProjectManipulation = (() => {
       DomManipulation.renderProject(name, counter);
       removeProjectInput();
     } else {
-      const projectInput = document.getElementById("project-input");
+      const projectInput = document.getElementById('project-input');
       DomManipulation.renderProjectInput(projectInput);
     }
   };
@@ -25,9 +26,9 @@ const ProjectManipulation = (() => {
   const showProjects = () => {
     for (let i = 0; i < localStorage.length; i += 1) {
       const key = localStorage.key(i);
-      if (key.startsWith("Project-")) {
+      if (key.startsWith('Project-')) {
         const value = JSON.parse(localStorage[key]);
-        const index = key.valueOf().replace(/\D/g, "");
+        const index = key.valueOf().replace(/\D/g, '');
         DomManipulation.renderProject(value.name, index);
       }
     }
@@ -35,7 +36,7 @@ const ProjectManipulation = (() => {
 
   const editProject = (element) => {
     const id = element.dataset.index;
-    const projectName = element.querySelector("input").value;
+    const projectName = element.querySelector('input').value;
     if (projectName.length > 3) {
       const project = localStorage.getItem(`Project-${id}`);
       const parsedProject = JSON.parse(project);
@@ -48,16 +49,16 @@ const ProjectManipulation = (() => {
   };
 
   const clickProjectEdit = () => {
-    const projectList = document.querySelector("#project-list");
-    projectList.addEventListener("click", (e) => {
-      if (e.target.className.includes("fa-edit")) {
-        const element = e.target.closest(".project-li");
+    const projectList = document.querySelector('#project-list');
+    projectList.addEventListener('click', (e) => {
+      if (e.target.className.includes('fa-edit')) {
+        const element = e.target.closest('.project-li');
         const tmp = element.innerHTML;
         DomManipulation.renderProjectInput(element);
-        element.addEventListener("click", (e) => {
-          if (e.target.className.includes("fa-check")) {
+        element.addEventListener('click', (e) => {
+          if (e.target.className.includes('fa-check')) {
             editProject(element);
-          } else if (e.target.className.includes("fa-remove")) {
+          } else if (e.target.className.includes('fa-remove')) {
             element.innerHTML = tmp;
           }
         });
@@ -66,11 +67,11 @@ const ProjectManipulation = (() => {
   };
 
   const clickProjectRemove = () => {
-    const check = document.querySelector("#project-list");
-    check.addEventListener("click", (e) => {
-      if (e.target.className.includes("fa-trash")) {
-        const element = e.target.closest(".project-li");
-        const index = element.dataset.index;
+    const check = document.querySelector('#project-list');
+    check.addEventListener('click', (e) => {
+      if (e.target.className.includes('fa-trash')) {
+        const element = e.target.closest('.project-li');
+        const { index } = element.dataset;
         localStorage.removeItem(`Project-${index}`);
         element.remove();
         location.reload();
